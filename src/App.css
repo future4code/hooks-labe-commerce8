@@ -2,9 +2,23 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.tamanhoImagem {
+  height: 200px;
+  width: 200px;
+}
+
+.cardCamisas{
+  border: 1px solid black;
+  margin: 2px;
+  padding: 10px;
+}
+
+.containerCamisas{
+  display: grid;
+  grid-template-columns: repeat(3, 350px);
+  grid-template-rows: repeat(3, 350px);
+  text-align: center;
+  
 }
 
 @media (prefers-reduced-motion: no-preference) {
