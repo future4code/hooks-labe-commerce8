@@ -1,10 +1,12 @@
+import { ShoppingCartOutlined } from '@material-ui/icons'
 import React from 'react'
-import camiseta1 from "../imagens/camiseta1.jpg"
-import camiseta2 from "../imagens/camiseta2.jpg"
-import camiseta3 from "../imagens/camiseta3.jpg"
-import camiseta4 from "../imagens/camiseta4.jpg"
-import camiseta5 from "../imagens/camiseta5.jpg"
-import camiseta6 from "../imagens/camiseta6.jpg"
+import camiseta1 from "../../imagens/camiseta1.jpg"
+import camiseta2 from "../../imagens/camiseta2.jpg"
+import camiseta3 from "../../imagens/camiseta3.jpg"
+import camiseta4 from "../../imagens/camiseta4.jpg"
+import camiseta5 from "../../imagens/camiseta5.jpg"
+import camiseta6 from "../../imagens/camiseta6.jpg"
+import { AddCarrinho, CardProduto, GradeCamisa, Nome, Preco } from './styled'
 
 
 class Produto extends React.Component {
@@ -13,57 +15,57 @@ class Produto extends React.Component {
         produtos: [
             {
             id: Date.now(), 
-            nomeProduto: 'camiseta1',
+            nomeProduto: 'Explorador',
             foto: camiseta1,
             valor: 89.99 
             },
             {
             id: Date.now(), 
-            nomeProduto: 'camiseta2',
+            nomeProduto: 'Space-weve',
             foto: camiseta2,
-            valor: 89.99 
+            valor: 69.99
             },
             {
             id: Date.now(), 
-            nomeProduto: 'camiseta3',
+            nomeProduto: 'Buraco Negro',
             foto: camiseta3,
-            valor: 89.99 
+            valor: 49.99
             },
             {
             id: Date.now(), 
-            nomeProduto: 'camiseta4',
+            nomeProduto: 'Infinito',
             foto: camiseta4,
-            valor: 89.99 
+            valor: 39.99
             },
             {
             id: Date.now(), 
-            nomeProduto: 'camiseta5',
+            nomeProduto: 'Super-Nova',
             foto: camiseta5,
-            valor: 89.99 
+            valor: 59.99 
             },
             {
             id: Date.now(), 
-            nomeProduto: 'camiseta6',
+            nomeProduto: 'AstroDev',
             foto: camiseta6,
-            valor: 89.99 
+            valor: 109.99 
             }
         ]
     }
 
     render(){
         return(
-            <div>
+            <GradeCamisa>
             {this.state.produtos.map((item, chave)=>{
                 return(
-                    <div key={chave.id}>
+                    <CardProduto key={chave.id}>
                         <img src={item.foto} alt='camisa'/>
-                        <p>{item.nomeProduto}</p>
-                        <p>{item.valor}</p>
-                        <button>Adicionar ao carrinho</button>
-                    </div>
+                        <Nome>{item.nomeProduto}</Nome>
+                        <Preco>R${item.valor}</Preco>
+                        <AddCarrinho><ShoppingCartOutlined/></AddCarrinho>
+                    </CardProduto>
                 )
             })}    
-          </div>
+          </GradeCamisa>
         )
     }
 }
