@@ -14,58 +14,80 @@ class Produto extends React.Component {
     state = {
         produtos: [
             {
-            id: Date.now(), 
-            nomeProduto: 'Explorador',
-            foto: camiseta1,
-            valor: 89.99 
+                id: Date.now(),
+                nomeProduto: 'Explorador',
+                foto: camiseta1,
+                valor: 89.99
             },
             {
-            id: Date.now(), 
-            nomeProduto: 'Space-weve',
-            foto: camiseta2,
-            valor: 69.99
+                id: Date.now(),
+                nomeProduto: 'Space-weve',
+                foto: camiseta2,
+                valor: 69.99
             },
             {
-            id: Date.now(), 
-            nomeProduto: 'Buraco Negro',
-            foto: camiseta3,
-            valor: 49.99
+                id: Date.now(),
+                nomeProduto: 'Buraco Negro',
+                foto: camiseta3,
+                valor: 49.99
             },
             {
-            id: Date.now(), 
-            nomeProduto: 'Infinito',
-            foto: camiseta4,
-            valor: 39.99
+                id: Date.now(),
+                nomeProduto: 'Infinito',
+                foto: camiseta4,
+                valor: 39.99
             },
             {
-            id: Date.now(), 
-            nomeProduto: 'Super-Nova',
-            foto: camiseta5,
-            valor: 59.99 
+                id: Date.now(),
+                nomeProduto: 'Super-Nova',
+                foto: camiseta5,
+                valor: 59.99
             },
             {
-            id: Date.now(), 
-            nomeProduto: 'AstroDev',
-            foto: camiseta6,
-            valor: 109.99 
+                id: Date.now(),
+                nomeProduto: 'AstroDev',
+                foto: camiseta6,
+                valor: 109.99
             }
-        ]
+        ],
+        query:'',
     }
 
-    render(){
-        return(
-            <GradeCamisa>
-            {this.state.produtos.map((item, chave)=>{
-                return(
-                    <CardProduto key={chave.id}>
-                        <img src={item.foto} alt='camisa'/>
-                        <Nome>{item.nomeProduto}</Nome>
-                        <Preco>R${item.valor}</Preco>
-                        <AddCarrinho><ShoppingCartOutlined/></AddCarrinho>
-                    </CardProduto>
-                )
-            })}    
-          </GradeCamisa>
+    updateQuery = (event) =>{
+        this.setState({
+            query: event.target.value
+        })
+    }
+
+    render() {
+        return (
+            <>
+                <div>
+                    <input type="search"
+                        placeholder="Busca..."
+                        value={this.state.query}
+                        onChange={this.updateQuery}
+                    />
+                </div>
+                <GradeCamisa>
+                    {this.state.produtos
+                    .filter((produto) => {
+                        return (
+                            produto.nomeProduto.toLowerCase().includes(this.state.query.toLowerCase())
+                        )
+                    })
+                    .map((item, chave) => {
+                        return (
+                            <CardProduto key={chave.id}>
+                                <img src={item.foto} alt='camisa' />
+                                <Nome>{item.nomeProduto}</Nome>
+                                <Preco>R${item.valor}</Preco>
+                                <AddCarrinho><ShoppingCartOutlined /></AddCarrinho>
+                            </CardProduto>
+                        )
+                    })}
+                </GradeCamisa>
+            </>
         )
     }
 }
