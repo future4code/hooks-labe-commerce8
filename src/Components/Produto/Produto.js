@@ -49,10 +49,28 @@ class Produto extends React.Component {
             foto: camiseta6,
             valor: 109.99 
             }
-        ]
+        ],
+        novoProduto :'xuxa',
+        novoValor : '100',
+    }
+    
+    
+
+    // Carrinho.
+
+    adicionandoCarrinho =(id)=>{
+      const novoCarrinho ={
+          id : Date.now(),
+          nomeProduto : this.novoProduto,
+          valor : this.novoValor,
+      }
+      
+      console.log(novoCarrinho)
+
     }
 
     render(){
+        
         return(
             <GradeCamisa>
             {this.state.produtos.map((item, chave)=>{
@@ -61,11 +79,18 @@ class Produto extends React.Component {
                         <img src={item.foto} alt='camisa'/>
                         <Nome>{item.nomeProduto}</Nome>
                         <Preco>R${item.valor}</Preco>
-                        <AddCarrinho><ShoppingCartOutlined/></AddCarrinho>
+                        <AddCarrinho onClick={this.adicionandoCarrinho}><ShoppingCartOutlined/></AddCarrinho>
                     </CardProduto>
                 )
-            })}    
+            })}   
+            <div>
+                <h2> Carrinho</h2>
+                <p>produtos</p>
+                <button>Remover</button>
+            </div>
+
           </GradeCamisa>
+
         )
     }
 }
