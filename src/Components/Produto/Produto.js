@@ -7,6 +7,7 @@ import camiseta4 from "../../imagens/camiseta4.jpg"
 import camiseta5 from "../../imagens/camiseta5.jpg"
 import camiseta6 from "../../imagens/camiseta6.jpg"
 import { AddCarrinho, CardProduto, GradeCamisa, Nome, Preco } from './styled'
+import Carrinho from '../Carrinho/Carrinho'
 
 
 class Produto extends React.Component {
@@ -51,6 +52,7 @@ class Produto extends React.Component {
             }
         ],
         query:'',
+        carrinho : []
     }
 
     updateQuery = (event) =>{
@@ -59,6 +61,45 @@ class Produto extends React.Component {
         })
     }
 
+    adicionarCarrinho = (camisasId) =>{
+        const addAoCarrinho = this.state.carrinho.find((camisas)=>camisasId === camisas.id
+        );
+        if(addAoCarrinho){
+            const novoCarrinho = this.state.carrinho.map((camisas)=>{
+                if(camisasId === camisas.id){
+                    return {
+                        ...camisas,
+                        quantidade : camisas.quantidade + 1
+                    };
+                }
+                return camisas;
+            });
+            this.setState({carrinho : novoCarrinho})
+        }else {
+            const addCarrinho = this.state.produtos.find((camisas)=> camisasId === camisas.id);
+            const addNovoCarrinho = [
+                ...this.state.carrinho,
+                {...addCarrinho , quantidade : + 1}
+            ]
+            this.setState({carrinho : addNovoCarrinho})
+        }
+    }
+    removeProduto = (prodId) => {
+        const updateCart = this.state.carrinho
+          .map((produto) => {
+            if (produto.id === prodId) {
+              return {
+                ...produto,
+                quantidade: produto.quantidade - 1
+              };
+            }
+            return produto;
+          })
+          .filter((produto) => produto.quantidade > 0);
+        this.setState({ carrinho: updateCart });
+      };
+    
+    
     render() {
         return (
             <>
@@ -82,10 +123,16 @@ class Produto extends React.Component {
                                 <img src={item.foto} alt='camisa' />
                                 <Nome>{item.nomeProduto}</Nome>
                                 <Preco>R${item.valor}</Preco>
-                                <AddCarrinho><ShoppingCartOutlined /></AddCarrinho>
+                                <AddCarrinho onClick={this.adicionarCarrinho}><ShoppingCartOutlined /></AddCarrinho>
                             </CardProduto>
                         )
                     })}
+                    <Carrinho
+                    produtos={this.state.produtos}
+                    removeProduto = {this.removeProduto}
+                    carrinho = {this.state.carrinho}
+                    addProduto={this.addProduto}
+                    />
                 </GradeCamisa>
             </>
         )
@@ -93,3 +140,4 @@ class Produto extends React.Component {
 }
 
 export default Produto 
+
