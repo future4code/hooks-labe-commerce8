@@ -16,7 +16,9 @@ class Header extends React.Component{
                     <img src={Logo} alt="logo"/>
                 </Centro>
                 <Direita>
-                    <ShoppingCartOutlined/>
+                    <button>
+                        <ShoppingCartOutlined/>
+                    </button>
                 </Direita>
             </Base>
         )
